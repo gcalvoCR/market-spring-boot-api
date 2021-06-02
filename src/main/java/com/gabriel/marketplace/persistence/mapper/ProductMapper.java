@@ -6,10 +6,9 @@ import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
-@Component
+
 //uses key let's the mapper know that it uses that class inside the category mapping
 @Mapper(componentModel = "spring", uses = {CategoryMapper.class})
 public interface ProductMapper {

@@ -132,6 +132,64 @@ In this project we use MapStruct to achieve the goal of orienting our API to dom
 ## Services in Spring
 - They mediate between the controller of the API and the repository
 
+## Response Entity
+
+- Dedicated class that controls our requests and responses the controllers receive
+
+## Swagger
+
+- Add dependencies
+  '''
+      // https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
+      implementation 'io.springfox:springfox-swagger2:2.9.2'
+    
+      // https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
+      implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+  '''
+- Create SwaggerConfig Class (check the source control)
+- Add anotations to you controllers
+- Voila!
+
+go to `hostmane/swagger-ui.html`
+
+- https://howtodoinjava.com/swagger2/swagger-spring-mvc-rest-example/
+
+## Spring Security
+How to configure Spring Security?
+- You can authenticate and authorize apps with Spring.
+- Protects from:
+  - Session Fixation
+  - clickJacking
+  - Cross site request forgery, etc.
+  
+- It has a default config.
+In order to use the default config, check the logs to get the password, and the username is `user`.
+
+If want to create a custome username and password:
+ - Create a new Service and implement UserDetailService. In this project, check `MarketUserDetailsService`
+ - We create a new class called SecurityConfig and annotate it with @EnableWebSecurity  to tell Spring that
+   this will be the class that handles the security.
+- Spring boot Security.
+
+## Authorization: Bearer <token> with JWT
+- It is an open-code standard to generate security tokens.
+- The authentication goes within the header of the request.
+<img src="./jwt.png" alt="jwt"/>
+  
+- To work with web tokens:
+  implementation 'io.jsonwebtoken:jjwt:0.9.1'
+
+## Build app
+
+build the app
+<img src="./build.PNG" alt="build image">
+
+Within the same project folder ru:
+
+- `java -jar build/libs/market-place-1.0.jar`
+- `java -jar "-Dspring.profiles.active=pdn" build/libs/market-place-1.0.jar`
+
+
 
 ## Notes
 
