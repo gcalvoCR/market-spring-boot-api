@@ -189,6 +189,28 @@ Within the same project folder ru:
 - `java -jar build/libs/market-place-1.0.jar`
 - `java -jar "-Dspring.profiles.active=pdn" build/libs/market-place-1.0.jar`
 
+## Create DB in Heroku
+
+- Install the Heroku CLI
+- Login to heroku using `heroku login`
+- create app `heroku create marketplace`
+- create db `heroku addons:create heroku-postgresql`
+- check the information needed to connect to the DB using `heroku config` specially DATABASE_URL:
+- Then we go to pgAdmin, and create a server
+- In the connection tab copy paste `postgres://USERNAME:PASSWORD@HOSTNAME:5432/NAME`
+- We then go the the DB/NAME/Schemas/public, right click and CREATE SCRIPT
+- Run the `schema.sql` and `data.sql` within that script.
+- By default we have env variables set to heroku that we could read from the application.properties file!
+- We are all set, check the application-pdn.properties file
+
+
+Check
+<img src="./create_server.PNG" alt="server image">
+
+And
+<img src="./create_script.PNG" alt="create script"> 
+
+For reference
 
 
 ## Notes
