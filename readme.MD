@@ -203,6 +203,9 @@ Within the same project folder ru:
 - By default we have env variables set to heroku that we could read from the application.properties file!
 - We are all set, check the application-pdn.properties file
 
+- Create a Procfile, check the one the project has.
+- 
+
 
 Check
 <img src="./create_server.PNG" alt="server image">
