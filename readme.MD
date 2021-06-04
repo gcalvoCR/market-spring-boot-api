@@ -1,21 +1,26 @@
 # Market Place Spring boot Rest API
 
-This project uses:
-- Postgress as DB, if you don't have it installed, please check how to install it
+In this project I explored a little deeper SpringBoot.
+- It uses Spring Security and jwts,
+- Postgress as DB,
+- documented using swagger,  
+- And deployed to Heroku.
+  
+Want to check the documentation?
+- `https://marketplace-gcalvocr.herokuapp.com/market-place/api/swagger-ui.html`
 
 
-## Steps to use the project
-1. Make sure you have postgress installed.
+## Steps to use the project locally
+1. Make sure you have Postgress installed.
 2. Open Postgress (pgAdmin), create a DB named `market-place`
-3. Run the schema.sql and data.sql scripts
+3. Run the schema.sql and data.sql scripts within the project
 4. DB set!
 
 
-## How to install Postgress
-Check the official website --> https://www.postgresql.org/
-Download the installer and follow instructions.
-Check that it is installed by:
-looking for PgAdmin and SQL Shell in programs
+### How to install Postgress
+- Check the official website --> `https://www.postgresql.org/`
+- Download the installer and follow instructions.
+- Check it is installed by looking for  PgAdmin  and  SQL Shell  in programs
 
 
 ### What's Spring?
@@ -68,7 +73,7 @@ JPA Annotation to connect classes to tables:
   - @GeneratedValue  -> generates values for primary keys
   - @OneToMany & @ManyToOne  -> To create Entity relations
 
-### What's Spring Data
+#### What's Spring Data
 - A project that uses JPA.
 - Used to optimize repetitive tasks
 - Repositories without code as
@@ -79,17 +84,17 @@ JPA Annotation to connect classes to tables:
 - Let us save a lot of coding.
 - They generate operations to the DB without code.
 
-### Query Methods
+#### Query Methods
 - Used when Spring Data doesn't provide what we need.
 - They can return `Optional<T>`
 - They follow a special syntax  
 - Example **findBy**IdCategoria**OrderBy**Nombre**Asc**(int idCategoria);
 
-## @Repository and @Component
+#### @Repository and @Component
 - Let Spring know that this is the layer that interacts with the DB.
 - @Repository is a specific type of @Component
 
-## Data Mapper pattern
+#### Data Mapper pattern
 - It consists in translate 2 object that can do the same job.
 - Benefits:
   - It doesn't expose the DB in the API
@@ -98,13 +103,14 @@ JPA Annotation to connect classes to tables:
   - IT prevents mixing languages in the app.
 
 In this project we use MapStruct to achieve the goal of orienting our API to domain
-
+```xml
     implementation 'org.mapstruct:mapstruct:1.4.2.Final' 
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+```
 
-## Dependency Inyection
+#### Dependency Injection
 - One of the 5 SOLID principles.
-- Single Responsability
+- Single Responsibility
 - Open / Closed
 - Liskov substitution
 - Interface segregation 
@@ -129,23 +135,23 @@ In this project we use MapStruct to achieve the goal of orienting our API to dom
 ### Layer 2 (Persistence)
 - Entity repositories
 
-## Services in Spring
+### Services in Spring
 - They mediate between the controller of the API and the repository
 
-## Response Entity
+### Response Entity
 
 - Dedicated class that controls our requests and responses the controllers receive
 
-## Swagger
+### Swagger
 
 - Add dependencies
-  '''
+  ```xml
       // https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
       implementation 'io.springfox:springfox-swagger2:2.9.2'
     
       // https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
       implementation 'io.springfox:springfox-swagger-ui:2.9.2'
-  '''
+  ```
 - Create SwaggerConfig Class (check the source control)
 - Add anotations to you controllers
 - Voila!
@@ -154,7 +160,7 @@ go to `hostmane/swagger-ui.html`
 
 - https://howtodoinjava.com/swagger2/swagger-spring-mvc-rest-example/
 
-## Spring Security
+### Spring Security
 How to configure Spring Security?
 - You can authenticate and authorize apps with Spring.
 - Protects from:
@@ -163,9 +169,10 @@ How to configure Spring Security?
   - Cross site request forgery, etc.
   
 - It has a default config.
+
 In order to use the default config, check the logs to get the password, and the username is `user`.
 
-If want to create a custome username and password:
+If want to create a custom username and password:
  - Create a new Service and implement UserDetailService. In this project, check `MarketUserDetailsService`
  - We create a new class called SecurityConfig and annotate it with @EnableWebSecurity  to tell Spring that
    this will be the class that handles the security.
@@ -197,31 +204,45 @@ Within the same project folder ru:
 - create db `heroku addons:create heroku-postgresql`
 - check the information needed to connect to the DB using `heroku config` specially DATABASE_URL:
 - Then we go to pgAdmin, and create a server
-- In the connection tab copy paste `postgres://USERNAME:PASSWORD@HOSTNAME:5432/NAME`
-- We then go the the DB/NAME/Schemas/public, right click and CREATE SCRIPT
+- In the connection tab copy and paste `postgres://USERNAME:PASSWORD@HOSTNAME:5432/NAME`
+- We then go the DB/NAME/Schemas/public, right click and CREATE SCRIPT
 - Run the `schema.sql` and `data.sql` within that script.
-- By default we have env variables set to heroku that we could read from the application.properties file!
+- By default, we have env variables set to heroku that we could read from the application.properties file!
 - We are all set, check the application-pdn.properties file
 
 - Create a Procfile, check the one the project has.
-- 
+- By default, the project will be buildt in java 8, if you want to change it, create a `system.properties`  
+  and add something like this --> `java.runtime.version=11`
+- Commit your changes to Github and from the command line do `git push heroku master` 
+
+# App information
+- Swagger: `https://marketplace-gcalvocr.herokuapp.com/market-place/api/swagger-ui.html`
+- Base URL: `https://marketplace-gcalvocr.herokuapp.com/market-place/api`
+
+Authenticate using the following json body
+```xml
+{
+    "username": "xxx",
+    "password": "xxx"
+}
+```
 
 
-Check
+- Check
 <img src="./create_server.PNG" alt="server image">
 
-And
+- And
 <img src="./create_script.PNG" alt="create script"> 
 
-For reference
 
-
+  
 ## Notes
 
-Maven --> handles dependencies with xml. Gradle --> handles dependencies with groovy.
+- Maven --> handles dependencies with xml. 
+- Gradle --> handles dependencies with groovy.
 
 
-#Useful links
+## Useful links
 
 (Reference for application.properties)[https://docs.spring.io/spring-boot/docs/1.1.6.RELEASE/reference/html/common-application-properties.html]
 
